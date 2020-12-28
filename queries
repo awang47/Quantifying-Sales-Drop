@@ -1,0 +1,16 @@
+#Here I am going to compute the daily cumulative sum of sales. 
+SELECT *, sum(count) OVER (ORDER BY sales_transaction_date) INTO
+       bat_sales_growth FROM bat_sales_daily
+       
+       
+#I am going to use a  7-day lag function of the sum column and insert all the columns of bat_ sales_daily and the new lag column into a new table.
+This lag column indicates what the sales were like 1 week before the given record:
+SELECT *, lag(sum, 7) OVER (ORDER BY sales_transaction_date) INTO
+       bat_sales_daily_delay FROM bat_sales_growth;
+       
+#I am going to use the sales growth as a percentage, comparing the current sales volume to that of 1 week prior.
+#SELECT *, (sum-lag)/lag AS volume INTO bat_sales_delay_vol FROM
+      bat_sales_daily_delay
+      
+(Looking at the output table, we can see four sets of information: 
+the daily sales count, the cumulative sum of the daily sales count, the cumulative sum offset by 1 week (the lag), and the relative daily sales volume.
