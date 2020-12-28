@@ -14,3 +14,9 @@ SELECT *, lag(sum, 7) OVER (ORDER BY sales_transaction_date) INTO
       
 (Looking at the output table, we can see four sets of information: 
 the daily sales count, the cumulative sum of the daily sales count, the cumulative sum offset by 1 week (the lag), and the relative daily sales volume.
+
+Analysis:
+With the lag and volume columns, I can now identify the drops in sales growth over the first couple of weeks. I compared the daily sum of sales to the same values 7 days earlier. 
+By subtracting the sum and lag values and dividing by the lag, we obtain the volume value and can determine sales growth compared to the previous week.
+By October 22, the volume doubled that of the week prior. As time passes, this relative difference begins to decrease dramatically.
+By the end of October, the volume is 28% higher than the week prior. Now, we have confirmed the presence of a reduction in sales growth of bat scotter after the first 2 weeks. 
